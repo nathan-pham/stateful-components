@@ -1,15 +1,15 @@
 {
-  "name": "web-experiment",
+  "name": "stateful-components",
   "version": "1.0.0",
-  "description": "Web experiment bootstrapped together with uti-app",
-  "main": "index.js",
+  "description": "stateful-components",
+  "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
 		"web",
-		"experiment",
-		"uti-app"
+    "state",
+    "component"
 	],
   "author": "Nathan Pham",
   "license": "MIT"
