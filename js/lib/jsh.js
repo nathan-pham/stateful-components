@@ -5,7 +5,7 @@ const createElement = (type, props={}, ...children) => {
   
   for(const [ key, value ] of Object.entries(props)) {
     key.startsWith("on") 
-      ? element.addEventListener(key.substring(2), value)
+      ? element.addEventListener(key.substring(2).toLowerCase(), value)
       : element.setAttribute(key, value)
   }
 
