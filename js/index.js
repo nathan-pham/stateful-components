@@ -1,28 +1,5 @@
 import define from "./lib/define.js"
-import * as jsh from "./lib/jsh.js"
-
-class Component extends HTMLElement {
-  constructor() {
-    super()
-    this.state = {}
-  }
-  connectedCallback() {
-    if(!this.shadowRoot) {
-      this.attachShadow({ mode: "open" })
-    }
-
-    this.shadowRoot.appendChild(this.render())
-  }
-  setState(newState) {
-    Object.assign(
-      this.state,
-      typeof newState == "function" ? newState(this.state) : newState
-    )
-
-    this.shadowRoot.firstChild.replaceWith(this.render())
-  }
-  render() {}
-}
+import Component, * as jsh from "./lib/jsh.js"
 
 class SButton extends Component {
   constructor() {
@@ -47,8 +24,6 @@ class SButton extends Component {
     )
   }
 }
-
-// document.body.insertAdjacentHTML( 'beforeend', "<p>Test</p>");
 
 define([
   { name: "s-button", extend: SButton }

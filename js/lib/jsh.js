@@ -26,6 +26,29 @@ const jsh = (type) => {
   })
 }
 
+class Component extends HTMLElement {
+  constructor() {
+    super()
+    this.state = {}
+  }
+  connectedCallback() {
+    if(!this.shadowRoot) {
+      this.attachShadow({ mode: "open" })
+    }
+
+    this.shadowRoot.appendChild(this.render())
+  }
+  setState(newState) {
+    Object.assign(
+      this.state,
+      typeof newState == "function" ? newState(this.state) : newState
+    )
+
+    this.shadowRoot.firstChild.replaceWith(this.render())
+  }
+  render() {}
+}
+
 export const a = jsh("a")
 export const b = jsh("b")
 export const i = jsh("i")
@@ -124,3 +147,4 @@ export const progress = jsh("progress")
 export const textarea = jsh("textarea")
 export const blockquote = jsh("blockquote")
 export const figcaption = jsh("figcaption")
+export default Component
