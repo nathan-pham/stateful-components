@@ -1,5 +1,5 @@
-import define from "./lib/define.js"
 import Component, * as jsh from "./lib/jsh.js"
+import define from "./lib/define.js"
 
 class SButton extends Component {
   constructor() {
