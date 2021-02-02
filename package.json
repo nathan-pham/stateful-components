@@ -1,0 +1,16 @@
+{
+  "name": "web-experiment",
+  "version": "1.0.0",
+  "description": "Web experiment bootstrapped together with uti-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+		"web",
+		"experiment",
+		"uti-app"
+	],
+  "author": "Nathan Pham",
+  "license": "MIT"
+}
