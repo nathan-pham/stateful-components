@@ -1,5 +1,6 @@
-import Component, * as jsh from "./lib/jsh.js"
 import define from "./lib/define.js"
+import Component from "./lib/component.js"
+import { h1, div, button } from "./lib/jsh.js"
 
 class SButton extends Component {
   constructor() {
@@ -18,9 +19,12 @@ class SButton extends Component {
   }
   render() {
     return (
-      jsh.button({
-        onClick: this.increment
-      }, `Count: ${ this.state.count }`)
+      div({},
+        h1({}, "Simple Button Component"),
+        button({
+          onClick: this.increment
+        }, "Count: " + this.state.count)
+      )
     )
   }
 }

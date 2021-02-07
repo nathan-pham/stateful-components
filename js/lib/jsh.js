@@ -1,11 +1,9 @@
-const TEXT_ELEMENT = "TEXT_ELEMENT"
-
 const createElement = (type, props={}, ...children) => {
   const element = document.createElement(type)
   
   for(const [ key, value ] of Object.entries(props)) {
     key.startsWith("on") 
-      ? element.addEventListener(key.substring(2).toLowerCase(), value)
+      ? element[key.toLowerCase()] = value
       : element.setAttribute(key, value)
   }
 
@@ -24,29 +22,6 @@ const jsh = (type) => {
   return ((props, ...children) => {
     return createElement(type, props, children)
   })
-}
-
-class Component extends HTMLElement {
-  constructor() {
-    super()
-    this.state = {}
-  }
-  connectedCallback() {
-    if(!this.shadowRoot) {
-      this.attachShadow({ mode: "open" })
-    }
-
-    this.shadowRoot.appendChild(this.render())
-  }
-  setState(newState) {
-    Object.assign(
-      this.state,
-      typeof newState == "function" ? newState(this.state) : newState
-    )
-
-    this.shadowRoot.firstChild.replaceWith(this.render())
-  }
-  render() {}
 }
 
 export const a = jsh("a")
@@ -147,4 +122,3 @@ export const progress = jsh("progress")
 export const textarea = jsh("textarea")
 export const blockquote = jsh("blockquote")
 export const figcaption = jsh("figcaption")
-export default Component
