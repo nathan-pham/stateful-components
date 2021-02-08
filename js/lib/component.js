@@ -12,6 +12,12 @@ class Component extends HTMLElement {
     }
 
     this.shadowRoot.appendChild(this.render())
+
+    if(this.style) {
+      let styleElement = document.createElement("style")
+      styleElement.textContent = this.style()
+      this.shadowRoot.appendChild(styleElement)
+    }
   }
   setState(newState) {
     Object.assign(
