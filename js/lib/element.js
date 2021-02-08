@@ -4,8 +4,9 @@ const createElement = (type, props={}, ...children) => {
   for(const [ key, value ] of Object.entries(props)) {
     key.startsWith("on")
       ? element[key.toLowerCase()] = value
-      : element.setAttribute(key, value)
+      : element.setAttributeNS(null, key, value)
   }
+
 
   children.flat(Infinity).forEach(child => {
     if(child) {

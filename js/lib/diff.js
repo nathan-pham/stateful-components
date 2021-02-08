@@ -12,7 +12,7 @@ const update = (oldNode, newNode) => {
   const setProp = (key, value) => {
     key.startsWith("on")
       ? oldNode.node[key.toLowerCase()] = value
-      : oldNode.node.setAttribute(key, value)
+      : oldNode.node.setAttributeNS(null, key, value)
   }
 
   const removeProp = (key) => {
