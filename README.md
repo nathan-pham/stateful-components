@@ -39,6 +39,8 @@ define([
 ```
 
 ## TODO
-* diffing algorithm (currently just replaces element)
 * `useState` functional components instead of classes 
 * publish helpers to NPM
+
+## Complete
+* diffing algorithm (currently just replaces element)
