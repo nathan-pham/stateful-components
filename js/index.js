@@ -43,6 +43,14 @@ class SButton extends Component {
   }
 }
 
+function test() {
+  let [count, setCount] = this.useState(0)
+  return (
+    button({ onClick: () => setCount(count + 1) }, count)
+  )
+}
+
 define([
-  { name: "s-button", extend: SButton }
+  { name: "s-button", element: SButton },
+  { name: "t-button", element: test }
 ])

@@ -34,7 +34,7 @@ class SButton extends Component {
 }
 
 define([
-  { name: "s-button", extend: SButton }
+  { name: "s-button", element: SButton }
 ])
 ```
 
