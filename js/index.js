@@ -17,6 +17,13 @@ class SButton extends Component {
       }
     })
   }
+  style() {
+    return (`
+      h1 {
+        color: red;
+      }    
+    `)
+  }
   render() {
     return (
       div({},
