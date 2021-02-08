@@ -6,8 +6,9 @@ Once you write a component class and pass it into the `define` function, you can
 
 ### Example Button App
 ```javascript
-import define from "./lib/define.js"
-import Component, { button } from "./lib/jsh.js"
+import Component, { define, jsh } from "stateful-components"
+
+const { button } = jsh
 
 class SButton extends Component {
   constructor() {
