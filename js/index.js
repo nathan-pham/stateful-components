@@ -20,7 +20,11 @@ class SButton extends Component {
   render() {
     return (
       div({},
-        h1({}, "Simple Button Component"),
+        [
+          this.state.count < 5
+            ? h1({}, "Simple Button Component")
+            : null
+        ],
         button({
           onClick: this.increment
         }, "Count: " + this.state.count)

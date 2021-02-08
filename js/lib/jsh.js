@@ -1,22 +1,4 @@
-const createElement = (type, props={}, ...children) => {
-  const element = document.createElement(type)
-  
-  for(const [ key, value ] of Object.entries(props)) {
-    key.startsWith("on") 
-      ? element[key.toLowerCase()] = value
-      : element.setAttribute(key, value)
-  }
-
-  children.flat().forEach(child => {
-    element.appendChild(
-      typeof child == "string"
-        ? document.createTextNode(child)
-        : child
-    )
-  })
-
-  return element
-}
+import createElement from "./element.js"
 
 const jsh = (type) => {
   return ((props, ...children) => {

@@ -20,7 +20,8 @@ class Component extends HTMLElement {
 
     diff(
       createMap(this.shadowRoot.firstChild),
-      createMap(this.render())
+      createMap(this.render()),
+      this.shadowRoot
     )
   }
   render() {}
