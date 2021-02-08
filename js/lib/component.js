@@ -4,14 +4,11 @@ import { createMap } from "./element.js"
 class Component extends HTMLElement {
   constructor() {
     super()
+    this.state = {}
     if(!this.shadowRoot) {
       this.attachShadow({ mode: "open" })
     }
     
-    this.state = {}
-  }
-  connectedCallback() {
-
     this.shadowRoot.appendChild(this.render())
 
     if(this.style) {
