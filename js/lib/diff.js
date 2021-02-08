@@ -2,30 +2,31 @@
 // newNode = newNode
 
 const update = (oldNode, newNode) => {
-  if(!newNode) {
-    oldNode.remove()
+  if(oldNode.type == "text") {
+    oldNode.parent.textContent = newNode.content
+    return
   }
-
-  const allAttributes = {
-    ...oldNode.attributes,
-    ...newNode.attributes
-  }
+  
+  const allAttributes = [
+    ...oldNode.props,
+    ...newNode.props
+  ]
 
   const setProp = (key, value) => {
     key.startsWith("on")
-      ? oldNode[key.toLowerCase()] = value
-      : oldNode.setAttribute(key, value)
+      ? oldNode.node[key.toLowerCase()] = value
+      : oldNode.node.setAttribute(key, value)
   }
 
   const removeProp = (key) => {
     key.startsWith("on")
-      ? oldNode[key.toLowerCase()] = ""
-      : oldNode.setAttribute(key, "")
+      ? oldNode.node[key.toLowerCase()] = ""
+      : oldNode.node.setAttribute(key, "")
   }
 
-  for(const key in allAttributes) {
-    const oValue = oldNode.getAttribute(key)
-    const nValue = newNode.getAttribute(key)
+  for(const key of allAttributes) {
+    const oValue = oldNode.node.getAttribute(key)
+    const nValue = newNode.node.getAttribute(key)
 
     // set a new value
     if(!oValue || oValue !== nValue) {
@@ -38,27 +39,20 @@ const update = (oldNode, newNode) => {
   }
 }
 
-const diff = (oldNode, newNode, shadowRoot) => {
-  console.log(oldNode, newNode)
-  // update(oldNode, newNode)
+const diff = (oldNode, newNode) => {
+  if(!newNode) {
+    oldNode.node.remove()
+  }
+  else if(oldNode.children.length !== newNode.children.length) {
+    oldNode.node.replaceWith(newNode.node)
+  }
+  else {
+    update(oldNode, newNode)
 
-  // for(const oChild of oldNode.childNodes) {
-  //   for(const nChild of newNode.childNodes) {
-  //     diff(oChild, nChild, oldNode)
-  //   }
-  // }
-
-  // todo: update content 
-
-    // if(![...oldNode.childNodes].includes(nChild)) {
-      // shadowRoot.appendChild(nChild)
-    // }
-
-  // for(const node of oldNodes) {
-  //   if(!newNodes.includes(node)) {
-  //     node.remove()
-  //   }
-  // }
+    oldNode.children.forEach((child, index) => {
+      diff(child, newNode.children[index])
+    })
+  }
 }
 
 export default diff

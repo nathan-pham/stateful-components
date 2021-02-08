@@ -1,4 +1,5 @@
-import diff, { createMap } from "./diff.js"
+import diff from "./diff.js"
+import { createMap } from "./element.js"
 
 class Component extends HTMLElement {
   constructor() {
@@ -19,9 +20,8 @@ class Component extends HTMLElement {
     )
 
     diff(
-      createMap(this.shadowRoot.firstChild),
-      createMap(this.render()),
-      this.shadowRoot
+      createMap(this.shadowRoot.firstChild, this.shadowRoot),
+      createMap(this.render(), this.shadowRoot)
     )
   }
   render() {}

@@ -19,19 +19,21 @@ const createElement = (type, props={}, ...children) => {
   return element
 }
 
-const createMap = (element) => {
-  return [...element.childNodes].map(node => {
-    const vNode = {
-      content: (node.childNodes && node.childNodes.length > 0) ? null : node.textContent,
-      props: node.attributes || {},
-      parent: element,
-      type: node.nodeType == 3 ? "text" : node.tagName.toLowerCase()
-      node,
-    }
+const createMap = (element, parent) => {
+  if(!element) {
+    return null
+  }
 
-    details.children = createMap(node)
-    return details
-  })
+  const vNode = {
+    content: (element.childNodes && element.childNodes.length > 0) ? null : element.textContent,
+    props: Object.keys(element.attributes || {}),
+    type: element.nodeType == 3 ? "text" : element.tagName.toLowerCase(),
+    node: element,
+    parent,
+  }
+
+  vNode.children = [...element.childNodes].map(node => createMap(node, element))
+  return vNode
 }
 
 export default createElement
