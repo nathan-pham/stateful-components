@@ -19,17 +19,27 @@ const createElement = (type, props={}, ...children) => {
   return element
 }
 
+const getAttributes = (attributes) => {
+  let a = []
+  for(let i = 0; i < attributes.length; i ++) {
+    a.push(attributes[i].name)
+  }
+  return a
+}
+
 const createMap = (element, parent) => {
   if(!element) {
     return null
   }
 
+  const type = element.nodeType == 3 ? "text" : element.tagName.toLowerCase()
+
   const vNode = {
     content: (element.childNodes && element.childNodes.length > 0) ? null : element.textContent,
-    props: Object.keys(element.attributes || {}),
-    type: element.nodeType == 3 ? "text" : element.tagName.toLowerCase(),
+    props: type !== "text" && element.hasAttributes() ? getAttributes(element.attributes) : [],
     node: element,
     parent,
+    type,
   }
 
   vNode.children = [...element.childNodes].map(node => createMap(node, element))

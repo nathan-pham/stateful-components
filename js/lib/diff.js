@@ -1,6 +1,3 @@
-// templateMap = oldNode
-// newNode = newNode
-
 const update = (oldNode, newNode) => {
   if(oldNode.type == "text") {
     oldNode.parent.textContent = newNode.content
@@ -21,7 +18,7 @@ const update = (oldNode, newNode) => {
   const removeProp = (key) => {
     key.startsWith("on")
       ? oldNode.node[key.toLowerCase()] = ""
-      : oldNode.node.setAttribute(key, "")
+      : oldNode.node.removeAttribute(key)
   }
 
   for(const key of allAttributes) {
