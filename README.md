@@ -1,5 +1,5 @@
 # Stateful Components
-Fuse web components with component syntax.
+Fuse web components with reactive, component syntax
 
 ## Usage
 Once you write a component class and pass it into the `define` function, you can use your new web component in standard HTML. 
