@@ -39,7 +39,6 @@ define([
 ```
 
 ## TODO
-* `useState` functional components instead of classes 
 * publish helpers to NPM
 
 ## Complete
