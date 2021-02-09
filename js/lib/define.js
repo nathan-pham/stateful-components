@@ -17,14 +17,14 @@ const define = (name, element) => {
           obj[key] = value
           diff(
             createMap(this.shadowRoot.firstChild, this.shadowRoot),
-            createMap(render(this.state), this.shadowRoot)
+            createMap(render(this.state, this.attributes), this.shadowRoot)
           )
           return true
         }
       }
 
       this.state = new Proxy(initialState || {}, stateHandler)
-      this.shadowRoot.appendChild(render(this.state))
+      this.shadowRoot.appendChild(render(this.state, this.attributes))
 
       if(style) {
         let styleElement = document.createElement("style")

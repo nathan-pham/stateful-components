@@ -9,7 +9,7 @@ const buttonX = () => {
     `
   }
 
-  const render = (state) => {
+  const render = (state, props) => {
     return (
       jsh.button({
         onClick: () => state.count = state.count + 1
@@ -20,7 +20,7 @@ const buttonX = () => {
   return {
     render,
     style,
-    state: {
+    initialState: {
       count: 0
     }
   }
