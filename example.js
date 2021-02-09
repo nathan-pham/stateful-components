@@ -1,31 +1,29 @@
-import Component, { define, jsh } from "stateful-components"
+import define, { jsh } from "./js/index.js"
 
-const { button } = jsh
+const buttonX = () => {
+  const style = () => {
+    return `
+      button {
+        color: red;
+      }
+    `
+  }
 
-class SButton extends Component {
-  constructor() {
-    super()
-    this.state = {
+  const render = (state) => {
+    return (
+      jsh.button({
+        onClick: () => state.count = state.count + 1
+      }, "Count: " + state.count)
+    )
+  }
+
+  return {
+    render,
+    style,
+    state: {
       count: 0
     }
-    this.increment = this.increment.bind(this)
-  }
-  increment() {
-    this.setState(state => {
-      return {
-        count: state.count + 1
-      }
-    })
-  }
-  render() {
-    return (
-      button({
-        onClick: this.increment
-      }, `Count: ${ this.state.count }`)
-    )
   }
 }
 
-define([
-  { name: "s-button", element: SButton }
-])
+define("x-button", buttonX)

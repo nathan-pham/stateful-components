@@ -6,37 +6,37 @@ Once you write a component class and pass it into the `define` function, you can
 
 ### Example Button App
 ```javascript
-import Component, { define, jsh } from "stateful-components"
+import define, { jsh } from "stateful-components"
 
-const { button } = jsh
-
-class SButton extends Component {
-  constructor() {
-    super()
-    this.state = {
-      count: 0
-    }
-    this.increment = this.increment.bind(this)
+const buttonX = () => {
+  const initialState = {
+    count: 0
   }
-  increment() {
-    this.setState(state => {
-      return {
-        count: state.count + 1
+
+  const style = () => {
+    return `
+      button {
+        color: red;
       }
-    })
+    `
   }
-  render() {
+
+  const render = (state) => {
     return (
-      button({
-        onClick: this.increment
-      }, `Count: ${ this.state.count }`)
+      jsh.button({
+        onClick: () => state.count = state.count + 1
+      }, "Count: " + state.count)
     )
+  }
+
+  return {
+    initialState
+    render,
+    style
   }
 }
 
-define([
-  { name: "s-button", element: SButton }
-])
+define("x-button", buttonX)
 ```
 
 ## TODO
