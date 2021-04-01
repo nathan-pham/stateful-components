@@ -15,7 +15,7 @@ import define, { jsh } "https://unpkg.com/stateful-components@latest"
 `define` initializes new web components. It accepts two arguments, the component name and a JS object containing the component's methods. Components have three properties: `initialState`, `style(state)`, and `render(state, element)`. 
 
 ## State
-Stateful web components are wrapped in a Proxy; directly modifying state will automatically trigger a DOM refresh. `stateful-components` is powered by a robust diffing algorithm so you can build performant and fast apps. 
+Stateful web components are wrapped in a Proxy; directly modifying state will automatically trigger a DOM refresh. `stateful-components` is also powered by a robust diffing algorithm, allowing you to build performant and fast apps. 
 
 ## Example Usage
 ```javascript
@@ -42,7 +42,7 @@ define("x-button", {
 ```html
 <!-- index.html -->
 <script type="module" src="/example.js"></script>
-<x-button>></x-button>
+<x-button></x-button>
 ```
 
 ## Example Components
