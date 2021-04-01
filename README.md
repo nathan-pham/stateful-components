@@ -1,46 +1,49 @@
 # Stateful Components
-Fuse web components with reactive, component syntax
+Bringing reactive syntax to web components
 
-## Usage
-Once you write a component class and pass it into the `define` function, you can use your new web component in standard HTML. 
+## Installation
+For npm:  
+```
+npm install stateful-components
+```
+For web:  
+```js
+import define, { jsh } "https://unpkg.com/stateful-components@latest"
+```
 
-### Example Button App
+## Define
+`define` initializes new web components. It accepts two arguments, the component name and a JS object containing the component's methods. Components have three properties: `initialState`, `style(state)`, and `render(state, element)`. 
+
+## State
+Stateful web components are wrapped in a Proxy; directly modifying state will automatically trigger a DOM refresh. `stateful-components` is powered by a robust diffing algorithm so you can build performant and fast apps. 
+
+## Example Usage
 ```javascript
+// example.js
 import define, { jsh } from "stateful-components"
+const { button } = jsh
 
-const buttonX = () => {
-  const initialState = {
-    count: 0
-  }
-
-  const style = () => {
+define("x-button", {
+  initialState: { count: 0 },
+  style() {
     return `
       button {
         color: red;
       }
     `
-  }
-
-  const render = (state) => {
+  },
+  render(state) {
     return (
-      jsh.button({
-        onClick: () => state.count = state.count + 1
-      }, "Count: " + state.count)
+      button({ onClick: () => state.count += 1 }, `Count: ${ state.count }`)
     )
   }
-
-  return {
-    initialState
-    render,
-    style
-  }
-}
-
-define("x-button", buttonX)
+})
+```
+```html
+<!-- index.html -->
+<script type="module" src="/example.js"></script>
+<x-button>></x-button>
 ```
 
-## TODO
-* publish helpers to NPM
-
-## Complete
-* diffing algorithm (currently just replaces element)
+## Example Components
+- [badge](https://github.com/nathan-pham/badge-web-component)
