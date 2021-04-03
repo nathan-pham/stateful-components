@@ -2,11 +2,15 @@
 Bringing reactive syntax to web components
 
 ## Installation
-For npm:  
+
+### Node
 ```
 npm install stateful-components
 ```
-For web:  
+```js
+import define, { jsh } from "stateful-components"
+```
+### Web
 ```js
 import define, { jsh } "https://unpkg.com/stateful-components@latest"
 ```
