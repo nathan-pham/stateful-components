@@ -1,6 +1,8 @@
 import diff from "./diff.js"
 import { createMap } from "./element.js"
 
+// TODO: onComponentMount / References
+
 const define = (name, element) => {
   const { initialState, render, style } = typeof element == "function" ? element() : element
 
