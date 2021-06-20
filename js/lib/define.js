@@ -12,13 +12,19 @@ const define = (name, element) => {
         this.attachShadow({ mode: "open" })
       }
 
+      this.styleElement = document.createElement("style")
+
       const stateHandler = {
         set: (obj, key, value) => {
           obj[key] = value
+          
           diff(
             createMap(this.shadowRoot.firstChild, this.shadowRoot),
             createMap(render(this.state, this), this.shadowRoot)
           )
+
+          this.setStyle()
+
           return true
         }
       }
@@ -27,10 +33,13 @@ const define = (name, element) => {
       this.shadowRoot.appendChild(render(this.state, this))
 
       if(style) {
-        let styleElement = document.createElement("style")
-        styleElement.textContent = style()
-        this.shadowRoot.appendChild(styleElement)
+        this.setStyle()
+        this.shadowRoot.appendChild(this.styleElement)
       }
+    }
+
+    setStyle() {
+      this.styleElement.textContent = typeof style == "function" ? style(this.state) : style
     }
   }
 
