@@ -1,10 +1,10 @@
 import define, { jsh } from "./js/index.js"
 
 const buttonX = () => {
-  const style = () => {
+  const style = (state) => {
     return `
       button {
-        color: red;
+        color: ${state.count % 2 == 0 ? "red" : "blue"};
       }
     `
   }
