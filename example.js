@@ -1,4 +1,4 @@
-import define, { jsh } from "./js/index.js"
+import define, { jsh } from "./dist/index.js"
 
 const buttonX = () => {
   const style = (state) => {
