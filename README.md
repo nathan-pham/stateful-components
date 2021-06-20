@@ -12,7 +12,7 @@ import define, { jsh } from "stateful-components"
 ```
 ### Web
 ```js
-import define, { jsh } "https://unpkg.com/stateful-components@latest"
+import define, { jsh } from "https://unpkg.com/stateful-components@latest"
 ```
 
 ## Define
@@ -51,3 +51,4 @@ define("x-button", {
 
 ## Example Components
 - [badge](https://github.com/nathan-pham/badge-web-component)
+- [console](https://github.com/nathan-pham/web-console)
