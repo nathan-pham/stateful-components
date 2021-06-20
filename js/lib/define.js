@@ -39,7 +39,10 @@ const define = (name, element) => {
     }
 
     setStyle() {
-      this.styleElement.textContent = typeof style == "function" ? style(this.state) : style
+      let newStyle = typeof style == "function" ? style(this.state) : style
+      if(newStyle !== this.styleElement.textContent) {
+        this.styleElement.textContent = newStyle
+      }
     }
   }
 
