@@ -6,6 +6,7 @@ const jsh = (type) => {
   })
 }
 
+export { jsh as wrap }
 export const a = jsh("a")
 export const b = jsh("b")
 export const i = jsh("i")
