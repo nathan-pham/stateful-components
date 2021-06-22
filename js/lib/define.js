@@ -27,7 +27,9 @@ const define = (name, element) => {
             createMap(render(this.state, this), this.shadowRoot)
           )
 
-          this.setStyle()
+          if(style) {
+            this.setStyle()
+          }
 
           return true
         }
@@ -43,14 +45,14 @@ const define = (name, element) => {
     }
 
     connectedCallback() {
-      if(mount) {
-        mount(this)
+      if(f(mount)) {
+        mount(this.state, this)
       }
     }
 
     disconnectedCallback() {
-      if(unmount) {
-        unmount(this)
+      if(f(unmount)) {
+        unmount(this.state, this)
       }
     }
 
