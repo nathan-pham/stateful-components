@@ -46,7 +46,7 @@ import define, { jsh, props } from "./dist/index.js"
 define("x-button", {
   state: { count: 0 },
 
-  style(state) {
+  style(state, target) {
     return `
       button {
         color: ${state.count % 2 == 0 ? "red" : "blue"};

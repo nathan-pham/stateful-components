@@ -57,7 +57,7 @@ const define = (name, element) => {
     }
 
     setStyle() {
-      let newStyle = f(style) ? style(this.state) : style
+      let newStyle = f(style) ? style(this.state, this) : style
       if(newStyle !== this.styleElement.textContent) {
         this.styleElement.textContent = newStyle
       }
