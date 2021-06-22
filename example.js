@@ -1,29 +1,27 @@
 import define, { jsh } from "./dist/index.js"
 
-const buttonX = () => {
-  const style = (state) => {
+define("x-button", {
+  state: { count: 0 },
+
+  style(state) {
     return `
       button {
         color: ${state.count % 2 == 0 ? "red" : "blue"};
       }
     `
-  }
+  },
 
-  const render = (state, props) => {
-    return (
-      jsh.button({
-        onClick: () => state.count = state.count + 1
-      }, "Count: " + state.count)
-    )
-  }
+  render(state, target) {
+    return jsh.button({
+      onClick: () => state.count = state.count + 1
+    }, "Count: " + state.count)
+  },
+  
+  mount(target) {
+    console.log('test')
+  },
 
-  return {
-    render,
-    style,
-    initialState: {
-      count: 0
-    }
+  unmount(target) {
+    console.log("ok")
   }
-}
-
-define("x-button", buttonX)
+})

@@ -3,8 +3,10 @@ import { createMap } from "./element.js"
 
 // TODO: onComponentMount / References
 
+const f = (v) => typeof v == "function"
+
 const define = (name, element) => {
-  const { initialState, render, style } = typeof element == "function" ? element() : element
+  const { state, render, style, mount, unmount } = element
 
   class Element extends HTMLElement {
     constructor() {
@@ -31,7 +33,7 @@ const define = (name, element) => {
         }
       }
 
-      this.state = new Proxy(initialState || {}, stateHandler)
+      this.state = new Proxy(state || {}, stateHandler)
       this.shadowRoot.appendChild(render(this.state, this))
 
       if(style) {
@@ -40,8 +42,20 @@ const define = (name, element) => {
       }
     }
 
+    connectedCallback() {
+      if(mount) {
+        mount(this)
+      }
+    }
+
+    disconnectedCallback() {
+      if(unmount) {
+        unmount(this)
+      }
+    }
+
     setStyle() {
-      let newStyle = typeof style == "function" ? style(this.state) : style
+      let newStyle = f(style) ? style(this.state) : style
       if(newStyle !== this.styleElement.textContent) {
         this.styleElement.textContent = newStyle
       }
