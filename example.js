@@ -1,4 +1,4 @@
-import define, { jsh } from "./dist/index.js"
+import define, { jsh, props } from "./dist/index.js"
 
 define("x-button", {
   state: { count: 0 },
@@ -12,16 +12,18 @@ define("x-button", {
   },
 
   render(state, target) {
+    console.log(props(target))
+
     return jsh.button({
       onClick: () => state.count = state.count + 1
     }, "Count: " + state.count)
   },
   
-  mount(target) {
+  mount(state, target) {
     console.log('test')
   },
 
-  unmount(target) {
+  unmount(state, target) {
     console.log("ok")
   }
 })
