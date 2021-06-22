@@ -1,6 +1,6 @@
 {
   "name": "stateful-components",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Fuse web components with reactive, component syntax",
   "main": "dist/index.js",
   "scripts": {

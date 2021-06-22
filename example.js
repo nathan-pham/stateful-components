@@ -20,10 +20,10 @@ define("x-button", {
   },
   
   mount(state, target) {
-    console.log('test')
+    console.log("mounted")
   },
 
   unmount(state, target) {
-    console.log("ok")
+    console.log("unmounted")
   }
 })

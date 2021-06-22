@@ -5,48 +5,73 @@ Bringing reactive syntax to web components
 
 ### Node
 ```
-npm install stateful-components
+>>> npm install stateful-components
 ```
 ```js
-import define, { jsh } from "stateful-components"
+import define, { jsh, props } from "stateful-components"
 ```
+
 ### Web
 ```js
-import define, { jsh } from "https://unpkg.com/stateful-components@latest"
+import define, { jsh, props } from "https://unpkg.com/stateful-components@latest"
 ```
 
-## Define
-`define` initializes new web components. It accepts two arguments, the component name and a JS object containing the component's methods. Components have three properties: `initialState`, `style(state)`, and `render(state, element)`. 
+## Usage
+### Define
+`define` initializes new web components. It accepts two arguments, the component name and a JS object containing the component's methods. Components have several properties:
+- state
+- style(state, target)
+- mount(state, target)
+- unmount(state, target)
+- render(start, target)
 
-## State
+### State
 Stateful web components are wrapped in a Proxy; directly modifying state will automatically trigger a DOM refresh. `stateful-components` is also powered by a robust diffing algorithm, allowing you to build performant and fast apps. 
 
-## Example Usage
+### Style
+Styles with web components are automatically scoped. With `stateful-components`, you can either supply a dynamic style function or just a normal string.
+
+### Mount & Unmount
+`mount` is called when the web component is first attached to the DOM.  
+`unmount` is called when the web component is detached from the DOM.  
+Use these methods to reference the actual element, apply event listeners, or make one-time edits to state.  
+
+### Render
+Anything returned from `render` is ultimately rendered onto the screen.
+
+## Example Web Component
 ```javascript
-// example.js
-import define, { jsh } from "stateful-components"
-const { button } = jsh
+import define, { jsh, props } from "./dist/index.js"
 
 define("x-button", {
-  initialState: { count: 0 },
-  style() {
+  state: { count: 0 },
+
+  style(state) {
     return `
       button {
-        color: red;
+        color: ${state.count % 2 == 0 ? "red" : "blue"};
       }
     `
   },
-  render(state) {
-    return (
-      button({ onClick: () => state.count += 1 }, `Count: ${ state.count }`)
-    )
+
+  render(state, target) {
+    console.log(props(target))
+
+    return jsh.button({
+      onClick: () => state.count = state.count + 1
+    }, "Count: " + state.count)
+  },
+  
+  mount(state, target) {
+    console.log("mounted")
+  },
+
+  unmount(state, target) {
+    console.log("unmounted")
   }
 })
-```
-```html
-<!-- index.html -->
-<script type="module" src="/example.js"></script>
-<x-button></x-button>
+
+// in html: <x-button></x-button>
 ```
 
 ## Example Components
